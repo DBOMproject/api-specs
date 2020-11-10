@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "266f8f3e-8f1a-4646-9fce-66fc23f5f8d9",
+		"name": "Chainsource Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add An Asset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"standardVersion\": 1.0,\r\n    \"documentName\": \"BoM for CPU Core i5 3500k\",\r\n    \"documentCreator\": \"Intel FAB California\",\r\n    \"documentCreatedDate\": \"2020-03-19\",\r\n    \"assetType\": \"HardwareComponent\",\r\n    \"assetSubType\": \"CPUUnit\",\r\n    \"assetManufacturer\": \"Intel Corporation\",\r\n    \"assetModelNumber\": \"BX80677I57500\",\r\n    \"assetDescription\": \"Core i5 3500k Desktop Processor\",\r\n    \"assetMetadata\": {  \r\n        \"clockSpeed\": \"3.4Ghz\",\r\n        \"cpuSocket\": \"LGA 1151\",\r\n        \"physicalCoreCount\": \"4\",\r\n        \"supportedMemoryType\": \"DDR4SDRAM\",\r\n        \"packageWattage\": \"65\",\r\n        \"packageWeight\": \"340g\"\r\n    },\r\n    \"manufactureSignature\": \"wsBcBAEBCAAQBQJecxBBCRDhB93OjBXccAAAlAQH/0N2HhaK6fmADG0QxK9i8xIrgncGzvii6OqPzyVtyjA7RrpgA1c5E5wN5eW8XmPaqpMvtP3RenuTlXTH2d647QnzdxYuNOKjVXGuweBMkBqnKBf8hHeH6adBTh6Jlnbt3OndMsE06BMBz59Z/X4tmKoAWXox1EPraAi9+A6BqeB5YHXDQJ6SXsW9fLKoQVECsi0MHOR+CjGcu1R1dyP5s2Vd9jcm+DLXLmxz6zTqS7h1neLMsFm4jIhxYsh5mQ49R4r6Yi76RIMK5G6LxX32BzKb9rTDSKdqRFQAv4JsoZXTPRwlM3MG/FCQWYhtvc6righlAMJOVSXTxy54TPKeXe4==SVL1\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"description": "Repository ID"
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"description": "Channel ID"
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"description": "Asset ID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve an Asset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Audit an Asset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID/audit",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"audit"
+					],
+					"variable": [
+						{
+							"enabled": true,
+							"key": "repoID",
+							"type": "text",
+							"value": "DB1"
+						},
+						{
+							"enabled": true,
+							"key": "channelID",
+							"type": "text",
+							"value": "C1"
+						},
+						{
+							"enabled": true,
+							"key": "assetID",
+							"type": "text",
+							"value": "ABC01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attach a SubAsset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"role\": \"InternalMemory\",\r\n   \"subRole\": \"L3Cache\",\r\n   \"repoID\": \"DB1\",\r\n   \"channelID\": \"C1\",\r\n   \"assetID\": \"ABC02\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID/attach",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"attach"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detach a Subasset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"assetID\": \"ABC02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID/detach",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"detach"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Asset",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"standardVersion\": 1.0,\r\n    \"documentName\": \"BoM for CPU Core i5 3500k\",\r\n    \"documentCreator\": \"Intel FAB California\",\r\n    \"documentCreatedDate\": \"2020-03-19\",\r\n    \"assetType\": \"HardwareComponent\",\r\n    \"assetSubType\": \"CPUUnit\",\r\n    \"assetManufacturer\": \"Intel Corporation\",\r\n    \"assetModelNumber\": \"BX80677I57500\",\r\n    \"assetDescription\": \"Core i5 3500k Desktop Processor\",\r\n    \"assetMetadata\": {  \r\n        \"clockSpeed\": \"3.4Ghz\",\r\n        \"cpuSocket\": \"LGA 1151\",\r\n        \"physicalCoreCount\": \"4\",\r\n        \"supportedMemoryType\": \"DDR4SDRAM\",\r\n        \"packageWattage\": \"65\",\r\n        \"packageWeight\": \"340g\"\r\n    },\r\n    \"manufactureSignature\": \"wsBcBAEBCAAQBQJecxBBCRDhB93OjBXccAAAlAQH/0N2HhaK6fmADG0QxK9i8xIrgncGzvii6OqPzyVtyjA7RrpgA1c5E5wN5eW8XmPaqpMvtP3RenuTlXTH2d647QnzdxYuNOKjVXGuweBMkBqnKBf8hHeH6adBTh6Jlnbt3OndMsE06BMBz59Z/X4tmKoAWXox1EPraAi9+A6BqeB5YHXDQJ6SXsW9fLKoQVECsi0MHOR+CjGcu1R1dyP5s2Vd9jcm+DLXLmxz6zTqS7h1neLMsFm4jIhxYsh5mQ49R4r6Yi76RIMK5G6LxX32BzKb9rTDSKdqRFQAv4JsoZXTPRwlM3MG/FCQWYhtvc6righlAMJOVSXTxy54TPKeXe4==SVL1\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+    },
+    {
+			"name": "Validate Asset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/repo/:repoID/chan/:channelID/asset/:assetID/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"validate"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Export an Asset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID/export",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"export"
+					],
+					"query": [
+						{
+							"key": "inlineResponse",
+							"value": "true",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "channelID",
+							"value": "C1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+    },
+    {
+			"name": "Transfer Asset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"transferDescription\": \"sold\",\r\n   \"repoID\": \"DB1\",\r\n   \"channelID\": \"C2\",\r\n   \"assetID\": \"ABC01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/repo/:repoID/chan/:channelID/asset/:assetID/transfer",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"repo",
+						":repoID",
+						"chan",
+						":channelID",
+						"asset",
+						":assetID",
+						"transfer"
+					],
+					"variable": [
+						{
+							"key": "repoID",
+							"value": "DB1"
+						},
+						{
+							"key": "channelID",
+							"value": "C1"
+						},
+						{
+							"key": "assetID",
+							"value": "ABC01"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

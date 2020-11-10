@@ -1,0 +1,483 @@
+openapi: 3.0.0
+info:
+  version: "1.0"
+  title: Chainsource Gateway
+  description: The HTTP REST API for the Digital Bill of Materials PoC's Distributed
+    Ledger Gateway
+paths:
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    post:
+      summary: Add An Asset
+      tags:
+        - Asset
+      operationId: AddAsset
+      deprecated: false
+      requestBody:
+        $ref: "#/components/requestBodies/AssetDefinition"
+      responses:
+        "200":
+          description: Asset was successfully created by the repository agent
+        "400":
+          description: Expected schema for an asset was not matched
+        "404":
+          description: No channel or repository found for that URI
+        "502":
+          description: Error on repository agent
+    get:
+      summary: Retrieve an Asset
+      tags:
+        - Asset
+      operationId: RetrieveAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Asset has been retrieved and is in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+    put:
+      summary: Update Asset
+      tags:
+        - Asset
+      operationId: UpdateAsset
+      deprecated: false
+      requestBody:
+        $ref: "#/components/requestBodies/AssetDefinition"
+      responses:
+        "200":
+          description: Asset was successfully created by the repository agent
+        "400":
+          description: Expected schema for an asset was not matched
+        "404":
+          description: No channel or repository found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/trail":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    get:
+      summary: Get the audit trail of an asset
+      tags:
+        - Asset
+      operationId: AuditAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Asset Audit Trail has been retrieved and is in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/attach":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    post:
+      summary: Attach a SubAsset
+      tags:
+        - Asset
+      operationId: AttachSubAsset
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AttachSubAssetRequest"
+        required: true
+      responses:
+        "200":
+          description: Asset was successfully attached to the passed subasset by the
+            repository agent
+        "400":
+          description: Expected schema for a subasset was not matched
+        "403":
+          description: Forbidden to add this subasset (Possibly already attached)
+        "404":
+          description: No channel or repository found for that URI
+        "409":
+          description: Conflict with state. Possibly attaching an asset to itself
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/detach":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    post:
+      summary: Detach a Subasset
+      tags:
+        - Asset
+      operationId: DetachSubasset
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetachSubassetRequest"
+        required: true
+      responses:
+        "200":
+          description: Asset was successfully unattached from the passed subasset by the
+            repository agent
+        "400":
+          description: Expected schema for a subasset was not matched
+        "403":
+          description: Forbidden to add this subasset (Possibly already linked)
+        "404":
+          description: No channel or repository found for that URI, or Subasset is not
+            already attached to this asset
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/validate":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    get:
+      summary: Validate the manufacturer signature
+      tags:
+        - Asset
+      operationId: ValidateAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Signature validated
+        "400":
+          description: Invalid signature
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/export":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+      - name: inlineOutput
+        in: query
+        required: false
+        description: Output as inline json
+        schema:
+          type: string
+    get:
+      summary: Export an asset
+      tags:
+        - Asset
+      operationId: ExportAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Asset as been exported to a json tree available in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/export/{fileName}":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+      - name: fileName
+        in: path
+        required: true
+        description: Name of file to export
+        schema:
+          type: string
+    get:
+      summary: Export an asset
+      tags:
+        - Asset
+      operationId: ExportFileAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Asset as been exported to a json tree available in the filename
+            specified
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/{assetID}/transfer":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    post:
+      summary: Transfer an Asset
+      tags:
+        - Asset
+      operationId: TransferAsset
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferAssetRequest"
+        required: true
+      responses:
+        "200":
+          description: Asset was successfully transferred to the given repository details
+            in the request body
+        "400":
+          description: Expected schema for an asset transfer was not matched
+        "404":
+          description: No channel or repository found for that URI
+        "409":
+          description: Destination asset already exists
+        "502":
+          description: Error on repository agent
+tags:
+  - name: Asset
+    description: ""
+servers:
+  - url: http://localhost:3000/api/v1
+components:
+  requestBodies:
+    AssetDefinition:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AssetDefinition"
+      required: true
+  schemas:
+    AssetDefinition:
+      title: AssetDefinition
+      example:
+        standardVersion: 1
+        documentName: BoM for CPU Core i5 3500k
+        documentCreator: Intel FAB California
+        documentCreatedDate: 2020-03-19
+        assetType: HardwareComponent
+        assetSubType: CPUUnit
+        assetManufacturer: Intel Corporation
+        assetModelNumber: BX80677I57500
+        assetDescription: Core i5 3500k Desktop Processor
+        assetMetadata:
+          clockSpeed: 3.4Ghz
+          cpuSocket: LGA 1151
+          physicalCoreCount: "4"
+          supportedMemoryType: DDR4SDRAM
+          packageWattage: "65"
+          packageWeight: 340g
+        manufactureSignature: wsBcBAEBCAAQBQJecxBBCRDhB93OjBXccAAAlAQH/0N2HhaK6fmADG0QxK9i8xIrgncGzvii6OqPzyVtyjA7RrpgA1c5E5wN5eW8XmPaqpMvtP3RenuTlXTH2d647QnzdxYuNOKjVXGuweBMkBqnKBf8hHeH6adBTh6Jlnbt3OndMsE06BMBz59Z/X4tmKoAWXox1EPraAi9+A6BqeB5YHXDQJ6SXsW9fLKoQVECsi0MHOR+CjGcu1R1dyP5s2Vd9jcm+DLXLmxz6zTqS7h1neLMsFm4jIhxYsh5mQ49R4r6Yi76RIMK5G6LxX32BzKb9rTDSKdqRFQAv4JsoZXTPRwlM3MG/FCQWYhtvc6righlAMJOVSXTxy54TPKeXe4==SVL1
+      type: object
+      properties:
+        standardVersion:
+          type: number
+        documentName:
+          type: string
+        documentCreator:
+          type: string
+        documentCreatedDate:
+          type: string
+        assetType:
+          type: string
+        assetSubType:
+          type: string
+        assetManufacturer:
+          type: string
+        assetModelNumber:
+          type: string
+        assetDescription:
+          type: string
+        assetMetadata:
+          type: object
+        manufactureSignature:
+          type: string
+      required:
+        - standardVersion
+        - documentName
+        - documentCreator
+        - documentCreatedDate
+        - assetType
+        - assetSubType
+        - assetManufacturer
+        - assetModelNumber
+        - assetDescription
+        - assetMetadata
+        - manufactureSignature
+    AttachSubAssetRequest:
+      title: AttachSubAssetRequest
+      example:
+        role: InternalMemory
+        subRole: L3Cache
+        repoID: DB1
+        channelID: C1
+        assetID: ABC02
+      type: object
+      properties:
+        role:
+          type: string
+        subRole:
+          type: string
+        repoID:
+          type: string
+        channelID:
+          type: string
+        assetID:
+          type: string
+      required:
+        - role
+        - subRole
+        - repoID
+        - channelID
+        - assetID
+    DetachSubassetRequest:
+      title: DetachSubassetRequest
+      example:
+        assetID: ABC02
+      type: object
+      properties:
+        assetID:
+          type: string
+      required:
+        - assetID
+    TransferAssetRequest:
+      title: TransferAssetRequest
+      example:
+        transferDescription: sold
+        repoID: DB1
+        channelID: C2
+        assetID: ABC01
+      type: object
+      properties:
+        transferDescription:
+          type: string
+        repoID:
+          type: string
+        channelID:
+          type: string
+        assetID:
+          type: string
+      required:
+        - repoID
+        - channelID
+        - assetID

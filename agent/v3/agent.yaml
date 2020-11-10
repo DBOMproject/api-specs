@@ -1,0 +1,258 @@
+openapi: 3.0.0
+info:
+  version: "1.0"
+  title: DBoM Agent
+  description: The HTTP REST API for the Digital Bill of Materials Agent
+paths:
+  "/channels/{channelID}/asset":
+    parameters:
+      - name: commit-type
+        in: header
+        required: true
+        description: Commit Type
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+    post:
+      summary: Commit an Asset
+      tags:
+        - Asset
+      operationId: CommitAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Record has been cretead successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateRecordResponseDefinition"
+        "404":
+          description: Channel does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "409":
+          description: Asset already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+  "/channels/{channelID}/asset/{assetID}":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+    get:
+      summary: Query an Asset
+      tags:
+        - Asset
+      operationId: RetrieveAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Record has been retrieved and is in the body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExampleRecordPayloadDefinition"
+        "404":
+          description: Channel and/or asset does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+  "/channels/{channelID}/asset/{assetID}/audit":
+    parameters:
+      - name: assetID
+        in: path
+        required: true
+        description: Asset ID
+        schema:
+          type: string
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+    get:
+      summary: Audit an asset
+      tags:
+        - Asset
+      operationId: AuditAsset
+      deprecated: false
+      responses:
+        "200":
+          description: Record Audit Trail has been retrieved and is in the body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditResponseDefinition"
+        "404":
+          description: Channel and/or asset does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+tags:
+  - name: Asset
+    description: ""
+servers:
+  - url: http://localhost:3000/
+components:
+  schemas:
+    RecordDefinition:
+      title: RecordDefinition
+      example:
+        recordID: exampleRecord
+        recordIDPayload:
+          example: example
+      type: object
+      properties:
+        recordID:
+          type: string
+        recordIDPayload:
+          type: object
+      required:
+        - recordID
+        - recordIDPayload
+    CreateRecordResponseDefinition:
+      title: CreateRecordResponseDefinition
+      example:
+        success: true
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
+    ErrorResponseDefinition:
+      title: ErrorResponseDefinition
+      example:
+        success: false
+        status: No resource found
+        error: Channel query failed
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+        error:
+          type: string
+      required:
+        - success
+        - status
+    ExampleRecordPayloadDefinition:
+      title: ExampleRecordPayloadDefinition
+      example:
+        example: example
+    AuditResponseDefinition:
+      title: AuditResponseDefinition
+      example:
+        history:
+          - _id: 3412
+            timestamp: 2020-9-01T21:04:14.840Z
+            payload:
+              example: example
+            resourceID: exampleRecord
+            eventType: CREATE
+            channelID: exampleChannel
+          - _id: 3474
+            timestamp: 2020-10-02T11:54:35.345Z
+            payload:
+              example: exampleUpdated
+            resourceID: exampleRecord
+            eventType: UPDATE
+            channelID: exampleChannel
+      type: object
+      properties:
+        history:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditDefinition"
+      required:
+        - history
+    AuditDefinition:
+      title: AuditDefinition
+      example:
+        _id: 3412
+        timestamp: 2020-10-01T21:04:14.840Z
+        payload:
+          example: example
+        resourceID: exampleRecord
+        eventType: CREATE
+        channelID: exampleChannel
+      type: object
+      properties:
+        _id:
+          type: number
+        timestamp:
+          type: string
+          format: date
+        payload:
+          type: object
+        resourceID:
+          type: string
+        eventType:
+          type: string
+        channelID:
+          type: string
+      required:
+        - _id
+        - timestamp
+        - payload
+        - resourceID
+        - eventType
+        - channelID
