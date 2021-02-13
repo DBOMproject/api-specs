@@ -2,9 +2,12 @@ openapi: 3.0.0
 info:
   version: "1.0"
   title: DBoM Agent
-  description: The HTTP REST API for the Digital Bill of Materials Agent
+  description: The HTTP REST API for the Distributed Bill of Materials Agent
+  contact:
+    name: Ryan
+    email: Ryan.Mathison2@unisys.com
 paths:
-  "/channels/{channelID}/asset":
+  "/channels/{channelID}/records":
     parameters:
       - name: commit-type
         in: header
@@ -19,10 +22,10 @@ paths:
         schema:
           type: string
     post:
-      summary: Commit an Asset
+      summary: Commit a Record
       tags:
-        - Asset
-      operationId: CommitAsset
+        - Record
+      operationId: CommitRecord
       deprecated: false
       responses:
         "200":
@@ -38,7 +41,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseDefinition"
         "409":
-          description: Asset already exists
+          description: Record already exists
           content:
             application/json:
               schema:
@@ -55,12 +58,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponseDefinition"
-  "/channels/{channelID}/asset/{assetID}":
+  "/channels/{channelID}/records/{recordID}":
     parameters:
-      - name: assetID
+      - name: recordID
         in: path
         required: true
-        description: Asset ID
+        description: Record ID
         schema:
           type: string
       - name: channelID
@@ -70,10 +73,10 @@ paths:
         schema:
           type: string
     get:
-      summary: Query an Asset
+      summary: Query a Record
       tags:
-        - Asset
-      operationId: RetrieveAsset
+        - Record
+      operationId: RetrieveRecord
       deprecated: false
       responses:
         "200":
@@ -83,7 +86,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ExampleRecordPayloadDefinition"
         "404":
-          description: Channel and/or asset does not exist
+          description: Channel and/or record does not exist
           content:
             application/json:
               schema:
@@ -100,12 +103,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponseDefinition"
-  "/channels/{channelID}/asset/{assetID}/audit":
+  "/channels/{channelID}/records/{recordID}/audit":
     parameters:
-      - name: assetID
+      - name: recordID
         in: path
         required: true
-        description: Asset ID
+        description: Record ID
         schema:
           type: string
       - name: channelID
@@ -115,10 +118,10 @@ paths:
         schema:
           type: string
     get:
-      summary: Audit an asset
+      summary: Audit an record
       tags:
-        - Asset
-      operationId: AuditAsset
+        - Record
+      operationId: AuditRecord
       deprecated: false
       responses:
         "200":
@@ -128,7 +131,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AuditResponseDefinition"
         "404":
-          description: Channel and/or asset does not exist
+          description: Channel and/or record does not exist
           content:
             application/json:
               schema:
@@ -146,7 +149,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseDefinition"
 tags:
-  - name: Asset
+  - name: Record
     description: ""
 servers:
   - url: http://localhost:3000/
@@ -237,10 +240,11 @@ components:
       type: object
       properties:
         _id:
-          type: number
+          type: integer
+          format: int64
         timestamp:
           type: string
-          format: date
+          format: date-time
         payload:
           type: object
         resourceID:
