@@ -7,29 +7,92 @@ info:
     name: Ryan
     email: Ryan.Mathison2@unisys.com
 paths:
+  /channels:
+    parameters: []
+    get:
+      summary: List Channels
+      tags:
+        - Record
+      operationId: ListRecords
+      deprecated: false
+      responses:
+        "200":
+          description: Array of channel ids retrieved successfully
+        "404":
+          description: No channels found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
   "/channels/{channelID}/records":
     parameters:
-      - name: commit-type
-        in: header
-        required: true
-        description: Commit Type
-        schema:
-          type: string
       - name: channelID
         in: path
         required: true
         description: Channel ID
         schema:
           type: string
+    get:
+      summary: List Records
+      tags:
+        - Record
+      operationId: ListRecordsPost
+      deprecated: false
+      responses:
+        "200":
+          description: Array of record ids retrieved successfully
+        "404":
+          description: No records found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
     post:
       summary: Commit a Record
       tags:
         - Record
+      parameters:
+        - name: commit-type
+          in: header
+          required: true
+          description: Commit Type
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordDefinition"
+        required: true
       operationId: CommitRecord
       deprecated: false
       responses:
         "200":
-          description: Record has been cretead successfully
+          description: Record has been created successfully
           content:
             application/json:
               schema:
@@ -42,6 +105,99 @@ paths:
                 $ref: "#/components/schemas/ErrorResponseDefinition"
         "409":
           description: Record already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+  "/channels/{channelID}/records/_query":
+    parameters:
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+    get:
+      summary: Query Records
+      tags:
+        - Record
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Query
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: false
+          description: Fields to return
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Pagination limit
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          required: false
+          description: Pagination skip
+          schema:
+            type: integer
+      operationId: QueryRecords
+      deprecated: false
+      responses:
+        "200":
+          description: Records have been retrieved successfully
+        "404":
+          description: Channel does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "500":
+          description: Error on agent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+        "502":
+          description: Error in repository
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDefinition"
+    post:
+      summary: Query Records
+      tags:
+        - Record
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRecordDefinition"
+        required: true
+      operationId: QueryRecordsPost
+      deprecated: false
+      responses:
+        "200":
+          description: Records have been retrieved successfully
+        "404":
+          description: Channel does not exist
           content:
             application/json:
               schema:
@@ -170,6 +326,38 @@ components:
       required:
         - recordID
         - recordIDPayload
+    QueryRecordDefinition:
+      title: QueryRecordDefinition
+      example:
+        query:
+          $and:
+            - assetType:
+                $eq: HardwareComponent
+            - assetSubType:
+                $eq: CPUUnit
+        fields:
+          - documentCreator
+          - documentCreatedDate
+          - documentName
+          - assetManufacturer
+          - assetMetadata
+          - manufactureSignature
+        limit: 20
+        skip: 0
+      type: object
+      properties:
+        query:
+          type: object
+        fields:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        skip:
+          type: integer
+      required:
+        - query
     CreateRecordResponseDefinition:
       title: CreateRecordResponseDefinition
       example:
