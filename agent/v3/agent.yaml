@@ -18,6 +18,10 @@ paths:
       responses:
         "200":
           description: Array of channel ids retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChannelsResponseDefinition"
         "404":
           description: No channels found
           content:
@@ -53,6 +57,10 @@ paths:
       responses:
         "200":
           description: Array of record ids retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecordsResponseDefinition"
         "404":
           description: No records found
           content:
@@ -163,6 +171,10 @@ paths:
       responses:
         "200":
           description: Records have been retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryRecordResponseDefinition"
         "404":
           description: Channel does not exist
           content:
@@ -196,6 +208,10 @@ paths:
       responses:
         "200":
           description: Records have been retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryRecordResponseDefinition"
         "404":
           description: Channel does not exist
           content:
@@ -240,7 +256,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExampleRecordPayloadDefinition"
+                $ref: "#/components/schemas/asset1PayloadDefinition"
         "404":
           description: Channel and/or record does not exist
           content:
@@ -311,12 +327,45 @@ servers:
   - url: http://localhost:3000/
 components:
   schemas:
+    ChannelsResponseDefinition:
+      title: ChannelsResponseDefinition
+      example:
+        - channel1
+        - channel2
+      type: array
+      items:
+        type: string
+    RecordsResponseDefinition:
+      title: RecordsResponseDefinition
+      example:
+        - asset1
+        - asset2
+        - asset3
+      type: array
+      items:
+        type: string
     RecordDefinition:
       title: RecordDefinition
       example:
-        recordID: exampleRecord
+        recordID: asset1
         recordIDPayload:
-          example: example
+          standardVersion: 1
+          documentName: BoM for CPU 6315K
+          documentCreator: Corp1
+          documentCreatedDate: 2020-03-19
+          assetType: HardwareComponent
+          assetSubType: CPUUnit
+          assetManufacturer: Corp1
+          assetModelNumber: FG83133A7I57500
+          assetDescription: 6315K Desktop Processor
+          assetMetadata:
+            clockSpeed: 3.4Ghz
+            cpuSocket: KSL 1231
+            physicalCoreCount: "4"
+            supportedMemoryType: DDR4SDRAM
+            packageWattage: "32"
+            packageWeight: 226g
+          manufactureSignature: ""
       type: object
       properties:
         recordID:
@@ -336,8 +385,8 @@ components:
             - assetSubType:
                 $eq: CPUUnit
         fields:
-          - documentCreator
-          - documentCreatedDate
+          - assetType
+          - assetSubType
           - documentName
           - assetManufacturer
           - assetMetadata
@@ -358,6 +407,38 @@ components:
           type: integer
       required:
         - query
+    QueryRecordResponseDefinition:
+      title: QueryRecordResponseDefinition
+      example:
+        asset1:
+          documentName: BoM for CPU 6315K
+          assetType: HardwareComponent
+          assetSubType: CPUUnit
+          assetManufacturer: Corp1
+          assetMetadata:
+            clockSpeed: 3.4Ghz
+            cpuSocket: LGA 1151
+            physicalCoreCount: "4"
+            supportedMemoryType: DDR4SDRAM
+            packageWattage: "65"
+            packageWeight: 340g
+          asset3:
+            documentName: BoM for CPU 6315K
+            assetType: HardwareComponent
+            assetSubType: CPUUnit
+            assetManufacturer: Corp1
+            assetMetadata:
+              clockSpeed: 3.4Ghz
+              cpuSocket: LGA 1151
+              physicalCoreCount: "4"
+              supportedMemoryType: DDR4SDRAM
+              packageWattage: "65"
+              packageWeight: 340g
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: "#/components/schemas/RecordDefinition"
     CreateRecordResponseDefinition:
       title: CreateRecordResponseDefinition
       example:
@@ -385,10 +466,26 @@ components:
       required:
         - success
         - status
-    ExampleRecordPayloadDefinition:
-      title: ExampleRecordPayloadDefinition
+    asset1PayloadDefinition:
+      title: asset1PayloadDefinition
       example:
-        example: example
+        standardVersion: 1
+        documentName: BoM for CPU 6315K
+        documentCreator: Corp1
+        documentCreatedDate: 2020-03-19
+        assetType: HardwareComponent
+        assetSubType: CPUUnit
+        assetManufacturer: Corp1
+        assetModelNumber: FG83133A7I57500
+        assetDescription: 6315K Desktop Processor
+        assetMetadata:
+          clockSpeed: 3.4Ghz
+          cpuSocket: KSL 1231
+          physicalCoreCount: "4"
+          supportedMemoryType: DDR4SDRAM
+          packageWattage: "34"
+          packageWeight: 226g
+        manufactureSignature: ""
     AuditResponseDefinition:
       title: AuditResponseDefinition
       example:
@@ -396,15 +493,47 @@ components:
           - _id: 3412
             timestamp: 2020-9-01T21:04:14.840Z
             payload:
-              example: example
-            resourceID: exampleRecord
+              standardVersion: 1
+              documentName: BoM for CPU 6315K
+              documentCreator: Corp1
+              documentCreatedDate: 2020-03-19
+              assetType: HardwareComponent
+              assetSubType: CPUUnit
+              assetManufacturer: Corp1
+              assetModelNumber: FG83133A7I57500
+              assetDescription: 6315K Desktop Processor
+              assetMetadata:
+                clockSpeed: 3.4Ghz
+                cpuSocket: KSL 1231
+                physicalCoreCount: "4"
+                supportedMemoryType: DDR4SDRAM
+                packageWattage: "32"
+                packageWeight: 226g
+              manufactureSignature: ""
+            resourceID: asset1
             eventType: CREATE
             channelID: exampleChannel
           - _id: 3474
             timestamp: 2020-10-02T11:54:35.345Z
             payload:
-              example: exampleUpdated
-            resourceID: exampleRecord
+              standardVersion: 1
+              documentName: BoM for CPU 6315K
+              documentCreator: Corp1
+              documentCreatedDate: 2020-03-19
+              assetType: HardwareComponent
+              assetSubType: CPUUnit
+              assetManufacturer: Corp1
+              assetModelNumber: FG83133A7I57500
+              assetDescription: 6315K Desktop Processor
+              assetMetadata:
+                clockSpeed: 3.4Ghz
+                cpuSocket: KSL 1231
+                physicalCoreCount: "4"
+                supportedMemoryType: DDR4SDRAM
+                packageWattage: "34"
+                packageWeight: 226g
+              manufactureSignature: ""
+            resourceID: asset1
             eventType: UPDATE
             channelID: exampleChannel
       type: object
@@ -422,7 +551,7 @@ components:
         timestamp: 2020-10-01T21:04:14.840Z
         payload:
           example: example
-        resourceID: exampleRecord
+        resourceID: asset1
         eventType: CREATE
         channelID: exampleChannel
       type: object
