@@ -2,9 +2,133 @@ openapi: 3.0.0
 info:
   version: "1.0"
   title: Chainsource Gateway
-  description: The HTTP REST API for the Digital Bill of Materials PoC's Distributed
-    Ledger Gateway
+  description:
+    The HTTP REST API for the Digital Bill of Materials PoC's Distributed Ledger
+    Gateway
 paths:
+  "/repo/{repoID}/chan":
+    parameters:
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    get:
+      summary: List Channels
+      tags:
+        - Asset
+      operationId: GetChannels
+      deprecated: false
+      responses:
+        "200":
+          description: Array of channel ids have been retrieved and are in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset":
+    parameters:
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    get:
+      summary: List Assets
+      tags:
+        - Asset
+      operationId: RetrieveAssets
+      deprecated: false
+      responses:
+        "200":
+          description: Array of asset ids have been retrieved and are in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "502":
+          description: Error on repository agent
+  "/repo/{repoID}/chan/{channelID}/asset/_query":
+    parameters:
+      - name: channelID
+        in: path
+        required: true
+        description: Channel ID
+        schema:
+          type: string
+      - name: repoID
+        in: path
+        required: true
+        description: Repository ID
+        schema:
+          type: string
+    get:
+      summary: Query Assets
+      tags:
+        - Asset
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Query
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: false
+          description: Fields to return
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Pagination limit
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          required: false
+          description: Pagination skip
+          schema:
+            type: integer
+      operationId: QueryAssets
+      deprecated: false
+      responses:
+        "200":
+          description: Assets have been retrieved successfully and are in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "500":
+          description: Error on agent
+        "502":
+          description: Error on repository agent
+    post:
+      summary: Query Assets
+      tags:
+        - Asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryAssetDefinition"
+        required: true
+      operationId: QueryAssetsPost
+      deprecated: false
+      responses:
+        "200":
+          description: Assets have been retrieved successfully and are in the body
+        "404":
+          description: No channel, repository or asset found for that URI
+        "500":
+          description: Error on agent
+        "502":
+          description: Error on repository agent
   "/repo/{repoID}/chan/{channelID}/asset/{assetID}":
     parameters:
       - name: assetID
@@ -139,7 +263,8 @@ paths:
         required: true
       responses:
         "200":
-          description: Asset was successfully attached to the passed subasset by the
+          description:
+            Asset was successfully attached to the passed subasset by the
             repository agent
         "400":
           description: Expected schema for a subasset was not matched
@@ -185,14 +310,16 @@ paths:
         required: true
       responses:
         "200":
-          description: Asset was successfully unattached from the passed subasset by the
+          description:
+            Asset was successfully unattached from the passed subasset by the
             repository agent
         "400":
           description: Expected schema for a subasset was not matched
         "403":
           description: Forbidden to add this subasset (Possibly already linked)
         "404":
-          description: No channel or repository found for that URI, or Subasset is not
+          description:
+            No channel or repository found for that URI, or Subasset is not
             already attached to this asset
         "502":
           description: Error on repository agent
@@ -304,7 +431,8 @@ paths:
       deprecated: false
       responses:
         "200":
-          description: Asset as been exported to a json tree available in the filename
+          description:
+            Asset as been exported to a json tree available in the filename
             specified
         "404":
           description: No channel, repository or asset found for that URI
@@ -344,7 +472,8 @@ paths:
         required: true
       responses:
         "200":
-          description: Asset was successfully transferred to the given repository details
+          description:
+            Asset was successfully transferred to the given repository details
             in the request body
         "400":
           description: Expected schema for an asset transfer was not matched
@@ -424,6 +553,38 @@ components:
         - assetDescription
         - assetMetadata
         - manufactureSignature
+    QueryAssetDefinition:
+      title: QueryAssetDefinition
+      example:
+        query:
+          $and:
+            - assetType:
+                $eq: HardwareComponent
+            - assetSubType:
+                $eq: CPUUnit
+        fields:
+          - documentCreator
+          - documentCreatedDate
+          - documentName
+          - assetManufacturer
+          - assetMetadata
+          - manufactureSignature
+        limit: 20
+        skip: 0
+      type: object
+      properties:
+        query:
+          type: object
+        fields:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        skip:
+          type: integer
+      required:
+        - query
     AttachSubAssetRequest:
       title: AttachSubAssetRequest
       example:
