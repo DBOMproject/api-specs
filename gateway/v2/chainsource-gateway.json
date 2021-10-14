@@ -149,7 +149,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Assets have been retrieved successfully and are in the body"
+            "description": "Assets have been retrieved successfully and are in the body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
           },
           "404": {
             "description": "No channel, repository or asset found for that URI"
@@ -245,7 +251,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Asset was successfully created by the repository agent"
           },
           "400": {

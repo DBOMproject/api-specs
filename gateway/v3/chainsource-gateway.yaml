@@ -2,8 +2,7 @@ openapi: 3.0.0
 info:
   version: "1.0"
   title: Chainsource Gateway
-  description:
-    The HTTP REST API for the Digital Bill of Materials PoC's Distributed Ledger
+  description: The HTTP REST API for the Digital Bill of Materials PoC's Distributed Ledger
     Gateway
 paths:
   "/repo/{repoID}/chan":
@@ -102,6 +101,12 @@ paths:
       responses:
         "200":
           description: Assets have been retrieved successfully and are in the body
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
         "404":
           description: No channel, repository or asset found for that URI
         "500":
@@ -158,7 +163,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/AssetDefinition"
       responses:
-        "200":
+        "201":
           description: Asset was successfully created by the repository agent
         "400":
           description: Expected schema for an asset was not matched
@@ -263,8 +268,7 @@ paths:
         required: true
       responses:
         "200":
-          description:
-            Asset was successfully attached to the passed subasset by the
+          description: Asset was successfully attached to the passed subasset by the
             repository agent
         "400":
           description: Expected schema for a subasset was not matched
@@ -310,16 +314,14 @@ paths:
         required: true
       responses:
         "200":
-          description:
-            Asset was successfully unattached from the passed subasset by the
+          description: Asset was successfully unattached from the passed subasset by the
             repository agent
         "400":
           description: Expected schema for a subasset was not matched
         "403":
           description: Forbidden to add this subasset (Possibly already linked)
         "404":
-          description:
-            No channel or repository found for that URI, or Subasset is not
+          description: No channel or repository found for that URI, or Subasset is not
             already attached to this asset
         "502":
           description: Error on repository agent
@@ -431,8 +433,7 @@ paths:
       deprecated: false
       responses:
         "200":
-          description:
-            Asset as been exported to a json tree available in the filename
+          description: Asset as been exported to a json tree available in the filename
             specified
         "404":
           description: No channel, repository or asset found for that URI
@@ -472,8 +473,7 @@ paths:
         required: true
       responses:
         "200":
-          description:
-            Asset was successfully transferred to the given repository details
+          description: Asset was successfully transferred to the given repository details
             in the request body
         "400":
           description: Expected schema for an asset transfer was not matched
