@@ -1,0 +1,771 @@
+openapi: 3.0.0
+x-stoplight:
+  id: pzf8yfjkcv8fo
+info:
+  version: '2.0'
+  title: DBoM Gateway
+  description: The HTTP REST API for the Digital Bill of Materials 2.x Gateway
+paths:
+  '/nodes/_local/notaries':
+    get:
+      summary: List locally configured notaries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotaryConfig'
+      operationId: ListNotaries
+      tags:
+        - Notaries
+      description: List all notaries that are configured locally
+  '/nodes/{node_uri}/_metadata':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+    get:
+      summary: Node metadata
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotaryConfig'
+      operationId: NodeMeta
+      tags:
+        - Nodes
+      description: Node metadata
+  '/nodes/{node_uri}/channels':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+    get:
+      summary: List Channels
+      operationId: GetChannels
+      deprecated: false
+      responses:
+        '200':
+          description: Array of channel summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChannelSummary'
+        '404':
+          description: 'No channel, repository or asset found for that URI'
+        '502':
+          description: Error on repository agent
+      tags:
+        - Channels
+      description: List all channels configured on a node
+    post:
+      summary: 'Create a channel'
+      operationId: CreateChannel
+      tags:
+       - Channels
+      responses:
+        '200':
+          description: Channel successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChannelDefinition'
+  '/nodes/{node_uri}/channels/{channel_id}':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+    get:
+      summary: 'Get details of a specific channnel'
+      operationId: GetChannelDetail
+      responses:
+        '200':
+          description: Channel Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelDetail'
+      tags:
+        - Channels
+  '/nodes/{node_uri}/channels/{channel_id}/notary':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+    put:
+      summary: 'Add a notary to a channel'
+      operationId: AttachNotary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotaryConfig'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notaryId:
+                  type: string
+      tags:
+        - Channels
+  '/nodes/{node_uri}/channels/{channel_id}/notary/{notary_id}':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: notary_id
+        in: path
+        required: true
+    delete:
+      summary: 'Remove a notary from a channel'
+      operationId: DetachNotary
+      responses:
+        '200':
+          description: Notary Detached
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      tags:
+        - Channels
+  '/nodes/{node_uri}/channels/{channel_id}/assets':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+    get:
+      summary: List Assets
+      operationId: RetrieveAssets
+      deprecated: false
+      responses:
+        '200':
+          description: Array of asset ids have been retrieved and are in the body
+        '404':
+          description: 'No channel, repository or asset found for that URI'
+        '502':
+          description: Error on repository agent
+      tags:
+        - Assets
+      description: List all assets
+  '/nodes/{node_uri}/channels/{channel_id}/assets/{asset_id}':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: asset_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+    post:
+      summary: Add An Asset
+      tags:
+        - Assets
+      operationId: AddAsset
+      deprecated: false
+      requestBody:
+        $ref: '#/components/requestBodies/AssetDefinition'
+      responses:
+        '200':
+          description: Asset was successfully created by the repository agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetDefinition'
+        '400':
+          description: Expected schema for an asset was not matched
+        '404':
+          description: No channel or repository found for that URI
+        '502':
+          description: Error on repository agent
+    get:
+      summary: Retrieve an Asset
+      operationId: RetrieveAsset
+      deprecated: false
+      responses:
+        '200':
+          description: Asset has been retrieved and is in the body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetDefinition'
+        '404':
+          description: 'No channel, repository or asset found for that URI'
+        '502':
+          description: Error on repository agent
+      tags:
+        - Assets
+      description: Get an asset
+    put:
+      summary: Update Asset
+      tags:
+        - Assets
+      operationId: UpdateAsset
+      deprecated: false
+      requestBody:
+        $ref: '#/components/requestBodies/AssetDefinition'
+      responses:
+        '200':
+          description: Asset was successfully created by the repository agent
+        '400':
+          description: Expected schema for an asset was not matched
+        '404':
+          description: No channel or repository found for that URI
+        '502':
+          description: Error on repository agent
+  '/nodes/{node_uri}/channels/{channel_id}/assets/_query':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+    get:
+      summary: Rich Query Assets
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Query
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: false
+          description: Fields to return
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Pagination limit
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          required: false
+          description: Pagination skip
+          schema:
+            type: integer
+      operationId: QueryAssets
+      deprecated: false
+      responses:
+        '200':
+          description: Assets have been retrieved successfully and are in the body
+        '404':
+          description: 'No channel, repository or asset found for that URI'
+        '500':
+          description: Error on agent
+        '502':
+          description: Error on repository agent
+      tags:
+        - Assets
+      description: Query Assets (with URL Params)
+    post:
+      summary: Query Assets
+      tags:
+        - Assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryAssetDefinition'
+        required: true
+      operationId: QueryAssetsPost
+      deprecated: false
+      responses:
+        '200':
+          description: Assets have been retrieved successfully and are in the body
+        '404':
+          description: 'No channel, repository or asset found for that URI'
+        '500':
+          description: Error on agent
+        '502':
+          description: Error on repository agent
+      description: Query Assets (with POST Body)
+  '/nodes/{node_uri}/channels/{channel_id}/assets/{asset_id}/audit-trail':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: asset_id
+        in: path
+        required: true
+    get:
+      summary: 'View chronological audit trail of asset'
+      operationId: AuditTrail
+      responses:
+        '200':
+          description: Audit Trail of Asset
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                          format: date-time
+                        asset:
+                          $ref: '#/components/schemas/AssetDefinition'
+      tags:
+        - Assets
+  '/nodes/{node_uri}/channels/{channel_id}/assets/{asset_id}/links':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: asset_id
+        in: path
+        required: true
+    post:
+      summary: Add link to an asset
+      operationId: AddLink
+      responses:
+        '200':
+          description: Link Added
+      tags:
+        - Assets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkDefinition'
+        description: ''
+  '/nodes/{node_uri}/channels/{channel_id}/assets/{asset_id}/links/{link_id}':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: asset_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: link_id
+        in: path
+        required: true
+    delete:
+      summary: 'Remove a link to another asset'
+      operationId: DeleteLink
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Assets
+  '/nodes/{node_uri}/channels/{channel_id}/assets/{asset_id}/validate':
+    parameters:
+      - schema:
+          type: string
+        name: node_uri
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: channel_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: asset_id
+        in: path
+        required: true
+    post:
+      summary: 'Validate notarization and signature on asset'
+      operationId: ValidateAsset
+      responses:
+        '200':
+          description: Validation Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      tags:
+        - Assets
+  '/federation/requests/all':
+    get:
+      summary: List all requests 
+      operationId: ListFedReq
+      deprecated: false
+      responses:
+        '200':
+          description: Array of requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FederationDefination'
+        '404':
+          description: 'No requests found'
+        '502':
+          description: Error on federation requests
+      tags:
+        - Federation
+      description: List all federation requests
+  '/federation/requests/{request_id}':
+    parameters:
+      - schema:
+          type: string
+        name: request_id
+        in: path
+        required: true
+    get:
+      summary: 'Get Status of request'
+      operationId: FedStatus
+      responses:
+        '200':
+          description: Array of requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationDefination'
+      tags:
+        - Federation
+  '/federation/requests/{request_id}/accept':
+    parameters:
+      - schema:
+          type: string
+        name: request_id
+        in: path
+        required: true
+    post:
+      summary: 'Accept the federation request'
+      operationId: FedAccept
+      responses:
+        '201':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                    type: string
+                nodeUri:
+                    type: string
+      tags:
+        - Federation
+  '/federation/requests/{request_id}/reject':
+    parameters:
+      - schema:
+          type: string
+        name: request_id
+        in: path
+        required: true
+    post:
+      summary: 'Reject the federation request'
+      operationId: FedReject
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FederationDefination'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                    type: string
+                nodeUri:
+                    type: string
+      tags:
+        - Federation
+servers:
+  - url: 'http://localhost:3050/api/v2'
+  - url: 'http://localhost:7205/api/v2'
+components:
+  requestBodies:
+    AssetDefinition:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AssetDefinition'
+      required: true
+  schemas:
+    AssetDefinition:
+      title: AssetDefinition
+      type: object
+      properties:
+        standardVersion:
+          type: number
+        schemaUrl:
+          type: string
+        created:
+          type: string
+        modified:
+          type: string
+        notarizations:
+          type: array
+          items:
+            type: object
+            properties:
+              notaryId:
+                type: string
+              notaryMeta:
+                type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkDefinition'
+        signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignatureDefinition'
+        body:
+          type: object
+        id:
+          type: string
+      required:
+        - standardVersion
+        - schemaUrl
+        - created
+        - modified
+        - notarizations
+        - links
+    QueryAssetDefinition:
+      title: QueryAssetDefinition
+      example:
+        query:
+          $and:
+            - assetType:
+                $eq: HardwareComponent
+            - assetSubType:
+                $eq: CPUUnit
+        fields:
+          - documentCreator
+          - documentCreatedDate
+          - documentName
+          - assetManufacturer
+          - assetMetadata
+          - manufactureSignature
+        limit: 20
+        skip: 0
+      type: object
+      properties:
+        query:
+          type: object
+        fields:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        skip:
+          type: integer
+      required:
+        - query
+    ChannelSummary:
+      title: ChannelSummary
+      x-stoplight:
+        id: 7uairxx86fcus
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+      description: |
+        Summary struct for a channel
+    ChannelDetail:
+      title: ChannelDetail
+      x-stoplight:
+        id: aetvprwldj9r2
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        notaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotaryConfig'
+        createdOn:
+          type: string
+        type:
+          type: string
+    ChannelDefinition:
+      title: ChannelDefinition
+      x-stoplight:
+        id: e0d5zabcbw0ja
+      type: object
+      description: Definition used to create a channel
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+        notaries:
+          type: array
+          items:
+            type: string
+    NotaryConfig:
+      title: NotaryMetadata
+      x-stoplight:
+        id: q468pc35o6lbm
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        config:
+          type: object
+      description: details of a notary
+    LinkDefinition:
+      title: LinkDefinition
+      x-stoplight:
+        id: dcoxwyxdt4s8g
+      type: object
+      properties:
+        assetUri:
+          type: string
+        type:
+          type: string
+        comment:
+          type: string
+        id:
+          type: string
+    SignatureDefinition:
+      title: SignatureDefinition
+      x-stoplight:
+        id: vxdd1fak4zcoc
+      type: object
+      properties:
+        hashType:
+          type: string
+        signType:
+          type: string
+        signMeta:
+          type: object
+          properties:
+            authority:
+              type: string
+            keyId:
+              type: string
+            sign:
+              type: string
+    FederationDefination:
+      title: FederationDefination
+      type: object
+      properties:
+        id:
+          type: string
+        localNodeId:
+          type: string
+        remoteUri:
+          type: string
+        status:
+          type: string
+        timestamp:
+          type: string

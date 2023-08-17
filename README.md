@@ -6,7 +6,6 @@ The OpenAPI Specifications for the Agent and Gateway. Also included are postman 
 
 To use the postman collections, simply import the appropriate collection and environment JSON files into Postman
 
-
 ## Getting help
 
 If you have any queries on importing and using the postman collections, feel free to reach us on any of our [communication channels](https://github.com/DBOMproject/community/blob/master/COMMUNICATION.md) 
