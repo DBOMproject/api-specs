@@ -3,7 +3,7 @@ x-stoplight:
   id: pzf8yfjkcv8fo
 info:
   version: '2.0'
-  title: DBoM Gateway
+  title: DBoM Gateway - User & Federation APIs
   description: The HTTP REST API for the Digital Bill of Materials 2.x Gateway
 paths:
   '/nodes/_local/notaries':
@@ -505,7 +505,7 @@ paths:
         '502':
           description: Error on federation requests
       tags:
-        - Federation
+        - Federation (On Port 7205)
       description: List all federation requests
   '/federation/requests/{request_id}':
     parameters:
@@ -525,7 +525,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/FederationDefination'
       tags:
-        - Federation
+        - Federation (On Port 7205)
   '/federation/requests/{request_id}/accept':
     parameters:
       - schema:
@@ -545,12 +545,12 @@ paths:
             schema:
               type: object
               properties:
-                type:
+                status:
                     type: string
-                nodeUri:
+                success:
                     type: string
       tags:
-        - Federation
+        - Federation (On Port 7205)
   '/federation/requests/{request_id}/reject':
     parameters:
       - schema:
@@ -567,7 +567,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FederationDefination'
+                type: object
+                properties:
+                  status:
+                    type: string
+                  success:
+                    type: string
       requestBody:
         content:
           application/json:
@@ -576,10 +581,40 @@ paths:
               properties:
                 type:
                     type: string
+      tags:
+        - Federation (On Port 7205)
+  '/federation/revoke':
+    post:
+      summary: 'Revoke the Node / Channel Access'
+      operationId: FedRevoke
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                      type: string
+                  success:
+                      type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
                 nodeUri:
                     type: string
+                nodeId:
+                    type: string
+                channelId:
+                    type: string
+                type:
+                    type: string
       tags:
-        - Federation
+        - Federation (On Port 7205)
 servers:
   - url: 'http://localhost:3050/api/v2'
   - url: 'http://localhost:7205/api/v2'
@@ -759,13 +794,17 @@ components:
       title: FederationDefination
       type: object
       properties:
-        id:
+        requestId:
           type: string
-        localNodeId:
+        nodeUri:
           type: string
-        remoteUri:
+        nodeId:
+          type: string
+        channelId:
           type: string
         status:
           type: string
-        timestamp:
+        createdAt:
+          type: string
+        modifiedAt:
           type: string
