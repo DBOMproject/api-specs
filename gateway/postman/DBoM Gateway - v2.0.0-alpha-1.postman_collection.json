@@ -1,9 +1,11 @@
 {
 	"info": {
-		"_postman_id": "ad572b6a-00ff-4d6c-9e01-c8201db0f257",
+		"_postman_id": "067ff502-1fa0-4fbf-90c1-2f45e15ce93b",
 		"name": "DBoM Gateway - v2.0.0-alpha-1",
 		"description": "The HTTP REST API for the Digital Bill of Materials 2.x Gateway",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28713797",
+		"_collection_link": "https://grey-equinox-369269.postman.co/workspace/DBoM-V2~075b9ece-b663-4f88-808b-6acd86a325ff/collection/28713797-067ff502-1fa0-4fbf-90c1-2f45e15ce93b?action=share&source=collection_link&creator=28713797"
 	},
 	"item": [
 		{
@@ -147,10 +149,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 18:18:06 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "316"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "[\n    {\n        \"id\": \"64e79e7a9d4b6e23de5aca8c\",\n        \"nodeId\": \"node1\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node2\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"SENT_CONNECTION_REQUEST\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:26.083Z\",\n        \"modifiedAt\": \"2023-08-24T18:16:52.547Z\"\n    }\n]"
 						},
 						{
 							"name": "Node1",
@@ -180,10 +197,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 18:19:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "302"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "[\n    {\n        \"id\": \"64e79e7a9d4b6e23de5aca8c\",\n        \"nodeId\": \"node1\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node2\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"CONNECTED\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:26.083Z\",\n        \"modifiedAt\": \"2023-08-24T18:19:40.284Z\"\n    }\n]"
 						}
 					]
 				},
@@ -245,10 +277,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 18:18:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "320"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "[\n    {\n        \"id\": \"64e79e793d525ffe84b60d4f\",\n        \"nodeId\": \"node2\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node1\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"RECEIVED_CONNECTION_REQUEST\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:25.768Z\",\n        \"modifiedAt\": \"2023-08-24T18:16:52.505Z\"\n    }\n]"
 						},
 						{
 							"name": "Node2",
@@ -278,10 +325,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 24 Aug 2023 18:19:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "309"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "[\n    {\n        \"id\": \"64e79e793d525ffe84b60d4f\",\n        \"nodeId\": \"node2\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node1\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"REQUEST_ACCEPTED\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:25.768Z\",\n        \"modifiedAt\": \"2023-08-24T18:19:35.228Z\"\n    }\n]"
 						}
 					]
 				}
@@ -651,7 +713,7 @@
 								},
 								{
 									"key": "channel_id",
-									"value": "channel2"
+									"value": "channel1"
 								}
 							]
 						},
@@ -1078,7 +1140,7 @@
 							"variable": [
 								{
 									"key": "node_uri",
-									"value": "node2.test.com",
+									"value": "node1.test.com",
 									"description": "(Required) "
 								},
 								{
@@ -1104,15 +1166,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets",
 									"host": [
@@ -1172,15 +1225,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets",
 									"host": [
@@ -1883,10 +1927,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -2363,10 +2407,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:20:59 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"requestId\": \"64f611f0d86d7e0b7ebc30e2\",\n            \"nodeUri\": \"node1.test.com\",\n            \"nodeId\": \"node1\",\n            \"channelId\": \"channel1\",\n            \"status\": \"AWAITING_ACTION\",\n            \"createdAt\": \"2023-09-04T17:20:48.257Z\",\n            \"modifiedAt\": \"2023-09-04T17:20:48.257Z\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2388,7 +2447,7 @@
 							"variable": [
 								{
 									"key": "request_id",
-									"value": "64ddf8eba4acb883b830ad7d"
+									"value": "64e79e943d525ffe84b60d54"
 								}
 							]
 						}
@@ -2412,15 +2471,116 @@
 									"variable": [
 										{
 											"key": "request_id",
-											"value": "64d5cdfe0b85693fafb23b0a"
+											"value": "64f611f0d86d7e0b7ebc30e2"
 										}
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:21:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"requestId\": \"64f611f0d86d7e0b7ebc30e2\",\n            \"nodeUri\": \"node1.test.com\",\n            \"nodeId\": \"node1\",\n            \"channelId\": \"channel1\",\n            \"status\": \"AWAITING_ACTION\",\n            \"createdAt\": \"2023-09-04T17:20:48.257Z\",\n            \"modifiedAt\": \"2023-09-04T17:20:48.257Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Wrong ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{node2Url}}/federation/requests/:request_id",
+									"host": [
+										"{{node2Url}}"
+									],
+									"path": [
+										"federation",
+										"requests",
+										":request_id"
+									],
+									"variable": [
+										{
+											"key": "request_id",
+											"value": "64f611f0d86d7e0b7ebc30e2s"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:28:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"Failed to retrieve FederationRequests\"\n}"
+						},
+						{
+							"name": "Incorrect ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{node2Url}}/federation/requests/:request_id",
+									"host": [
+										"{{node2Url}}"
+									],
+									"path": [
+										"federation",
+										"requests",
+										":request_id"
+									],
+									"variable": [
+										{
+											"key": "request_id",
+											"value": "64f611f0d86d7e0b7ebc30e2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:48:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"FederationRequest 64f611f0d86d7e0b7ebc30e2 not found\"\n}"
 						}
 					]
 				},
@@ -2452,7 +2612,7 @@
 							"variable": [
 								{
 									"key": "request_id",
-									"value": "64ddf8eba4acb883b830ad7d"
+									"value": "64e79e943d525ffe84b60d54"
 								}
 							]
 						}
@@ -2510,6 +2670,59 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully accepted federation request\"\n}"
+						},
+						{
+							"name": "Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"ACCEPT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{node2Url}}/federation/requests/:request_id/accept",
+									"host": [
+										"{{node2Url}}"
+									],
+									"path": [
+										"federation",
+										"requests",
+										":request_id",
+										"accept"
+									],
+									"variable": [
+										{
+											"key": "request_id",
+											"value": "64f5aec73f49364b7b3881f6"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:37:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "144"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"Something went wrong\",\n    \"error\": \"FederationRequest 64f5aec73f49364b7b3881f6 not found or already ACCEPTED / REJECTED\"\n}"
 						}
 					]
 				},
@@ -2599,6 +2812,59 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully rejected federation request\"\n}"
+						},
+						{
+							"name": "Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"REJECT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{node2Url}}/federation/requests/:request_id/reject",
+									"host": [
+										"{{node2Url}}"
+									],
+									"path": [
+										"federation",
+										"requests",
+										":request_id",
+										"reject"
+									],
+									"variable": [
+										{
+											"key": "request_id",
+											"value": "64ddf8eba4acb883b830ad7d"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Sep 2023 17:38:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "144"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"Something went wrong\",\n    \"error\": \"FederationRequest 64ddf8eba4acb883b830ad7d not found or already ACCEPTED / REJECTED\"\n}"
 						}
 					]
 				},
@@ -2739,10 +3005,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				}
@@ -2796,6 +3062,26 @@
 					"body": "Chainsource Gateway User and Client APIs - v2. runtime:go1.19.2"
 				}
 			]
+		},
+		{
+			"name": "Check WS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3050/api/v2/ws",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"api",
+						"v2",
+						"ws"
+					]
+				}
+			},
+			"response": []
 		},
 		{
 			"name": "Check Federation",
