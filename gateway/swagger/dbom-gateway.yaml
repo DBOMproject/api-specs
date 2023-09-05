@@ -663,8 +663,6 @@ components:
       required:
         - standardVersion
         - schemaUrl
-        - created
-        - modified
         - notarizations
         - links
     QueryAssetDefinition:
