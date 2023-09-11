@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "067ff502-1fa0-4fbf-90c1-2f45e15ce93b",
+		"_postman_id": "903fc889-195f-4ecb-8c52-b28d74612d51",
 		"name": "DBoM Gateway - v2.0.0-alpha-1",
 		"description": "The HTTP REST API for the Digital Bill of Materials 2.x Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28713797",
-		"_collection_link": "https://grey-equinox-369269.postman.co/workspace/DBoM-V2~075b9ece-b663-4f88-808b-6acd86a325ff/collection/28713797-067ff502-1fa0-4fbf-90c1-2f45e15ce93b?action=share&source=collection_link&creator=28713797"
+		"_collection_link": "https://grey-equinox-369269.postman.co/workspace/DBoM-V2~075b9ece-b663-4f88-808b-6acd86a325ff/collection/28713797-903fc889-195f-4ecb-8c52-b28d74612d51?action=share&source=collection_link&creator=28713797"
 	},
 	"item": [
 		{
@@ -52,9 +52,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{node2Url}}/nodes/:node_uri/_metadata",
+									"raw": "{{baseUrl}}/nodes/:node_uri/_metadata",
 									"host": [
-										"{{node2Url}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"nodes",
@@ -64,7 +64,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "node2"
+											"value": "node1.test.com"
 										}
 									]
 								}
@@ -79,15 +79,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 11 Aug 2023 06:00:03 GMT"
+									"value": "Wed, 06 Sep 2023 20:48:23 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "426"
+									"value": "328"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64d5cda60b85693fafb23b07\",\n        \"nodeId\": \"node2\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node1\",\n                \"status\": \"FEDERATED\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"CONNECTED\",\n                        \"access\": \"READ\"\n                    },\n                    {\n                        \"channelId\": \"channel2\",\n                        \"status\": \"REJECTED\",\n                        \"access\": \"READ\"\n                    },\n                    {\n                        \"channelId\": \"channel3\",\n                        \"status\": \"AWAITING_CONNECTION\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-11T05:56:54.113Z\",\n        \"modifiedAt\": \"2023-08-11T05:59:54.312Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"id\": \"64f8e1b7fc555f4c0d65e25f\",\n            \"nodeId\": \"node1\",\n            \"publicKeys\": [],\n            \"nodeConnections\": [\n                {\n                    \"nodeId\": \"node2\",\n                    \"status\": \"FEDERATION_SUCCESS\",\n                    \"channelConnections\": [\n                        {\n                            \"channelId\": \"channel1\",\n                            \"status\": \"CONNECTED\",\n                            \"access\": \"READ\"\n                        }\n                    ]\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:31:51.137Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:37.706Z\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -159,63 +159,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 24 Aug 2023 18:18:06 GMT"
+									"value": "Wed, 06 Sep 2023 20:48:28 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "316"
+									"value": "328"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64e79e7a9d4b6e23de5aca8c\",\n        \"nodeId\": \"node1\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node2\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"SENT_CONNECTION_REQUEST\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:26.083Z\",\n        \"modifiedAt\": \"2023-08-24T18:16:52.547Z\"\n    }\n]"
-						},
-						{
-							"name": "Node1",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{node1Url}}/nodes/:node_uri/_metadata",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"_metadata"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node1.test.com"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 24 Aug 2023 18:19:52 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "302"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64e79e7a9d4b6e23de5aca8c\",\n        \"nodeId\": \"node1\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node2\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"CONNECTED\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:26.083Z\",\n        \"modifiedAt\": \"2023-08-24T18:19:40.284Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"id\": \"64f8e1b7fc555f4c0d65e25f\",\n            \"nodeId\": \"node1\",\n            \"publicKeys\": [],\n            \"nodeConnections\": [\n                {\n                    \"nodeId\": \"node2\",\n                    \"status\": \"FEDERATION_SUCCESS\",\n                    \"channelConnections\": [\n                        {\n                            \"channelId\": \"channel1\",\n                            \"status\": \"CONNECTED\",\n                            \"access\": \"READ\"\n                        }\n                    ]\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:31:51.137Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:37.706Z\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -272,7 +224,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "node2.test.com"
+											"value": "node2.test.com1"
 										}
 									]
 								}
@@ -287,63 +239,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 24 Aug 2023 18:18:42 GMT"
+									"value": "Wed, 06 Sep 2023 20:48:33 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "320"
+									"value": "335"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64e79e793d525ffe84b60d4f\",\n        \"nodeId\": \"node2\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node1\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"RECEIVED_CONNECTION_REQUEST\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:25.768Z\",\n        \"modifiedAt\": \"2023-08-24T18:16:52.505Z\"\n    }\n]"
-						},
-						{
-							"name": "Node2",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{node2Url}}/nodes/:node_uri/_metadata",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"_metadata"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node2.test.com"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 24 Aug 2023 18:19:57 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "309"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64e79e793d525ffe84b60d4f\",\n        \"nodeId\": \"node2\",\n        \"publicKeys\": [],\n        \"nodeConnections\": [\n            {\n                \"nodeId\": \"node1\",\n                \"status\": \"FEDERATION_SUCCESS\",\n                \"channelConnections\": [\n                    {\n                        \"channelId\": \"channel1\",\n                        \"status\": \"REQUEST_ACCEPTED\",\n                        \"access\": \"READ\"\n                    }\n                ]\n            }\n        ],\n        \"createdAt\": \"2023-08-24T18:16:25.768Z\",\n        \"modifiedAt\": \"2023-08-24T18:19:35.228Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"id\": \"64f8e1b7e38860350a2cd267\",\n            \"nodeId\": \"node2\",\n            \"publicKeys\": [],\n            \"nodeConnections\": [\n                {\n                    \"nodeId\": \"node1\",\n                    \"status\": \"FEDERATION_SUCCESS\",\n                    \"channelConnections\": [\n                        {\n                            \"channelId\": \"channel1\",\n                            \"status\": \"REQUEST_ACCEPTED\",\n                            \"access\": \"READ\"\n                        }\n                    ]\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:31:51.906Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:37.606Z\"\n        }\n    ]\n}"
 						}
 					]
 				}
@@ -368,7 +272,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"channelId\": \"channel1\",\n    \"description\": \"Channel1 of Node 2 - Remote\",\n    \"type\": \"TEST_CHANNEL\",\n    \"notaries\": [\n        {\n            \"id\": \"ahgsduih\",\n            \"type\": \"SIGNED\",\n            \"config\": {}\n        }\n    ]\n}",
+							"raw": "{\n    \"channelId\": \"channel3\",\n    \"description\": \"Channel3 of Node 1 - Remote\",\n    \"type\": \"TEST_CHANNEL\",\n    \"notaries\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -396,6 +300,68 @@
 					},
 					"response": [
 						{
+							"name": "Error to Create a channel",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"channelId\": \"channel1\",\n    \"description\": \"Channel1 of Node 2 - Remote\",\n    \"type\": \"TEST_CHANNEL\",\n    \"notaries\": [\n        {\n            \"id\": \"ahgsduih\",\n            \"type\": \"SIGNED\",\n            \"config\": {}\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{node1Url}}/nodes/:node_uri/channels",
+									"host": [
+										"{{node1Url}}"
+									],
+									"path": [
+										"nodes",
+										":node_uri",
+										"channels"
+									],
+									"variable": [
+										{
+											"key": "node_uri",
+											"value": "node1.test.com",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Sep 2023 20:49:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"invalid request\",\n    \"error\": \"failed to create channel\"\n}"
+						},
+						{
 							"name": "Create a channel",
 							"originalRequest": {
 								"method": "POST",
@@ -411,7 +377,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"channelId\": \"Channel2\",\n    \"description\": \"Channel2 - Local\",\n    \"type\": \"TEST_CHANNEL\",\n    \"notaries\": [\n        {\n            \"id\": \"ahgsduih\",\n            \"type\": \"SIGNED\",\n            \"config\": {}\n        }\n    ]\n}",
+									"raw": "{\n    \"channelId\": \"channel3\",\n    \"description\": \"Channel3 of Node 1 - Remote\",\n    \"type\": \"TEST_CHANNEL\",\n    \"notaries\": [\n        {\n            \"id\": \"ahgsduih\",\n            \"type\": \"SIGNED\",\n            \"config\": {}\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -419,9 +385,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels",
+									"raw": "{{node1Url}}/nodes/:node_uri/channels",
 									"host": [
-										"{{baseUrl}}"
+										"{{node1Url}}"
 									],
 									"path": [
 										"nodes",
@@ -431,7 +397,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "_local",
+											"value": "node1.test.com",
 											"description": "(Required) "
 										}
 									]
@@ -447,15 +413,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 May 2023 09:43:44 GMT"
+									"value": "Thu, 07 Sep 2023 18:44:47 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "72"
+									"value": "57"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to create channel\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully created channel\"\n}"
 						}
 					]
 				},
@@ -475,7 +441,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"notaryId\": \"notary-sample\"\n}",
+							"raw": "{\n  \"notaryId\": \"notary-sample\",\n  \"notaryMeta\": {}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -509,6 +475,74 @@
 					},
 					"response": [
 						{
+							"name": "Error Add a notary to a channel",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"notaryId\": \"notary-sample-1\",\n  \"notaryMeta\": {}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/notary",
+									"host": [
+										"{{node1Url}}"
+									],
+									"path": [
+										"nodes",
+										":node_uri",
+										"channels",
+										":channel_id",
+										"notary"
+									],
+									"variable": [
+										{
+											"key": "node_uri",
+											"value": "node1.test.com",
+											"description": "(Required) "
+										},
+										{
+											"key": "channel_id",
+											"value": "channel10"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Sep 2023 10:45:39 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"invalid request\",\n    \"error\": \"channel does not exist\"\n}"
+						},
+						{
 							"name": "Add a notary to a channel",
 							"originalRequest": {
 								"method": "PUT",
@@ -524,7 +558,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"notaryId\": \"notary1\"\n}",
+									"raw": "{\n  \"notaryId\": \"notary-sample\",\n  \"notaryMeta\": {}\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -532,9 +566,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/notary",
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/notary",
 									"host": [
-										"{{baseUrl}}"
+										"{{node1Url}}"
 									],
 									"path": [
 										"nodes",
@@ -546,12 +580,12 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "_local",
+											"value": "node1.test.com",
 											"description": "(Required) "
 										},
 										{
 											"key": "channel_id",
-											"value": "Channel1"
+											"value": "channel1"
 										}
 									]
 								}
@@ -566,15 +600,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 May 2023 09:44:24 GMT"
+									"value": "Thu, 07 Sep 2023 17:46:25 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "92"
+									"value": "64"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to update notary details to a channel\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully updated channel notary\"\n}"
 						}
 					]
 				},
@@ -632,9 +666,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/notary/:notary_id",
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/notary/:notary_id",
 									"host": [
-										"{{baseUrl}}"
+										"{{node1Url}}"
 									],
 									"path": [
 										"nodes",
@@ -647,17 +681,17 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "_local",
+											"value": "node1.test.com",
 											"description": "(Required) "
 										},
 										{
 											"key": "channel_id",
-											"value": "Channel1",
+											"value": "channel1",
 											"description": "(Required) "
 										},
 										{
 											"key": "notary_id",
-											"value": "notary2",
+											"value": "notary-sample",
 											"description": "(Required) "
 										}
 									]
@@ -673,15 +707,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 May 2023 09:45:35 GMT"
+									"value": "Thu, 07 Sep 2023 10:47:00 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "94"
+									"value": "64"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to delete notary details from a channel\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully removed channel notary\"\n}"
 						}
 					]
 				},
@@ -713,13 +747,66 @@
 								},
 								{
 									"key": "channel_id",
-									"value": "channel1"
+									"value": "channel12"
 								}
 							]
 						},
 						"description": "List all channels configured on a node"
 					},
 					"response": [
+						{
+							"name": "List Channels by Channel ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{node2Url}}/nodes/:node_uri/channels/:channel_id",
+									"host": [
+										"{{node2Url}}"
+									],
+									"path": [
+										"nodes",
+										":node_uri",
+										"channels",
+										":channel_id"
+									],
+									"variable": [
+										{
+											"key": "node_uri",
+											"value": "node2.test.com"
+										},
+										{
+											"key": "channel_id",
+											"value": "channel1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Sep 2023 21:05:48 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "257"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"description\": \"Channel1 of Node 2 - Remote\",\n            \"type\": \"TEST_CHANNEL\",\n            \"notaries\": [\n                {\n                    \"id\": \"ahgsduih\",\n                    \"type\": \"SIGNED\",\n                    \"config\": {}\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:32:10.669Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:10.669Z\"\n        }\n    ]\n}"
+						},
 						{
 							"name": "List Channels by Channel ID",
 							"originalRequest": {
@@ -763,121 +850,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:32:55 GMT"
+									"value": "Wed, 06 Sep 2023 21:08:06 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "221"
+									"value": "257"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"description\": \"Channel1 - Remote\",\n        \"type\": \"TEST_CHANNEL\",\n        \"notaries\": [\n            {\n                \"id\": \"ahgsduih\",\n                \"type\": \"SIGNED\",\n                \"config\": {}\n            }\n        ],\n        \"createdAt\": \"2023-08-10T13:32:26.525Z\",\n        \"modifiedAt\": \"2023-08-10T13:32:26.525Z\"\n    }\n]"
-						},
-						{
-							"name": "Federation Request",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"channels",
-										":channel_id"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node2.test.com"
-										},
-										{
-											"key": "channel_id",
-											"value": "channel1"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 13 Aug 2023 18:59:16 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "65"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"status\": \"Successfully sent federation request\",\n    \"success\": true\n}"
-						},
-						{
-							"name": "After Accept - List Channels by Channel ID",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"channels",
-										":channel_id"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node2.test.com"
-										},
-										{
-											"key": "channel_id",
-											"value": "channel2"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 17 Aug 2023 10:46:24 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "231"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel2\",\n        \"description\": \"Channel2 of Node 2 - Remote\",\n        \"type\": \"TEST_CHANNEL\",\n        \"notaries\": [\n            {\n                \"id\": \"ahgsduih\",\n                \"type\": \"SIGNED\",\n                \"config\": {}\n            }\n        ],\n        \"createdAt\": \"2023-08-17T08:26:55.626Z\",\n        \"modifiedAt\": \"2023-08-17T08:26:55.626Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"description\": \"Channel1 of Node 1 - Remote\",\n            \"type\": \"TEST_CHANNEL\",\n            \"notaries\": [\n                {\n                    \"id\": \"ahgsduih\",\n                    \"type\": \"SIGNED\",\n                    \"config\": {}\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:32:10.082Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:10.082Z\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -949,15 +930,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:33:26 GMT"
+									"value": "Wed, 06 Sep 2023 21:05:37 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "272"
+									"value": "486"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"description\": \"Channel1 - Remote\",\n        \"type\": \"TEST_CHANNEL\",\n        \"notaries\": [\n            {\n                \"id\": \"ahgsduih\",\n                \"type\": \"SIGNED\",\n                \"config\": {}\n            },\n            {\n                \"id\": \"notary-sample\",\n                \"type\": \"SIGNED\",\n                \"config\": {}\n            }\n        ],\n        \"createdAt\": \"2023-08-10T13:32:26.525Z\",\n        \"modifiedAt\": \"2023-08-10T13:33:25.095Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"description\": \"Channel1 of Node 1 - Remote\",\n            \"type\": \"TEST_CHANNEL\",\n            \"notaries\": [\n                {\n                    \"id\": \"ahgsduih\",\n                    \"type\": \"SIGNED\",\n                    \"config\": {}\n                }\n            ],\n            \"createdAt\": \"2023-09-06T20:32:10.082Z\",\n            \"modifiedAt\": \"2023-09-06T20:32:10.082Z\"\n        },\n        {\n            \"channelId\": \"channel3\",\n            \"description\": \"Channel3 of Node 1 - Remote\",\n            \"type\": \"TEST_CHANNEL\",\n            \"notaries\": [\n                {\n                    \"id\": \"ahgsduih\",\n                    \"type\": \"SIGNED\",\n                    \"config\": {}\n                }\n            ],\n            \"createdAt\": \"2023-09-06T21:05:26.480Z\",\n            \"modifiedAt\": \"2023-09-06T21:05:26.480Z\"\n        }\n    ]\n}"
 						}
 					]
 				}
@@ -1015,7 +996,7 @@
 								},
 								{
 									"key": "asset_id",
-									"value": "asset1",
+									"value": "asset3",
 									"description": "(Required) "
 								}
 							]
@@ -1071,7 +1052,7 @@
 										},
 										{
 											"key": "asset_id",
-											"value": "asset1",
+											"value": "asset3",
 											"description": "(Required) "
 										}
 									]
@@ -1087,15 +1068,90 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:35:40 GMT"
+									"value": "Thu, 07 Sep 2023 06:40:40 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "70"
+									"value": "55"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to create asset\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully created asset\"\n}"
+						},
+						{
+							"name": "Error Add An Asset",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"standardVersion\": 1,\r\n    \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\r\n    \"createdAt\": \"2023-05-15T12:34:56Z\",\r\n    \"modifiedAt\": \"2023-05-15T12:34:56Z\",\r\n    \"notarizations\": [\r\n        {\r\n            \"notaryId\": \"not1\",\r\n            \"notaryMeta\": {}\r\n        }\r\n    ],\r\n    \"links\": [\r\n        {\r\n            \"assetUri\": \"string\",\r\n            \"type\": \"asset\",\r\n            \"comment\": \"example2\",\r\n            \"id\": \"link1\"\r\n        }\r\n    ],\r\n    \"signatures\": [\r\n        {\r\n            \"hashType\": \"SHA256\",\r\n            \"signType\": \"type1\",\r\n            \"signMeta\": {\r\n                \"authority\": \"user1\",\r\n                \"keyId\": \"12345\",\r\n                \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\r\n            }\r\n        }\r\n    ],\r\n    \"body\": {}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets/:asset_id",
+									"host": [
+										"{{node1Url}}"
+									],
+									"path": [
+										"nodes",
+										":node_uri",
+										"channels",
+										":channel_id",
+										"assets",
+										":asset_id"
+									],
+									"variable": [
+										{
+											"key": "node_uri",
+											"value": "node1.test.com",
+											"description": "(Required) "
+										},
+										{
+											"key": "channel_id",
+											"value": "channel1",
+											"description": "(Required) "
+										},
+										{
+											"key": "asset_id",
+											"value": "asset3",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Sep 2023 06:40:48 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"invalid request\",\n    \"error\": \"failed to create asset\"\n}"
 						}
 					]
 				},
@@ -1166,10 +1222,19 @@
 										"value": "application/json"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets",
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets",
 									"host": [
-										"{{baseUrl}}"
+										"{{node1Url}}"
 									],
 									"path": [
 										"nodes",
@@ -1201,74 +1266,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:35:58 GMT"
+									"value": "Thu, 07 Sep 2023 06:47:22 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "564"
+									"value": "1136"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"payload\": {\n            \"standardVersion\": 1,\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"type\": \"asset\",\n                    \"comment\": \"example2\",\n                    \"id\": \"link1\"\n                }\n            ],\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signType\": \"type1\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                    }\n                }\n            ],\n            \"body\": {},\n            \"id\": \"\"\n        }\n    }\n]"
-						},
-						{
-							"name": "After Accept - List Assets",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"channels",
-										":channel_id",
-										"assets"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node2.test.com",
-											"description": "(Required) "
-										},
-										{
-											"key": "channel_id",
-											"value": "channel1"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 17 Aug 2023 10:47:41 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "556"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"payload\": {\n            \"standardVersion\": 1,\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"type\": \"asset\",\n                    \"comment\": \"example2\",\n                    \"id\": \"link1\"\n                }\n            ],\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signType\": \"type1\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                    }\n                }\n            ],\n            \"body\": {}\n        }\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"payload\": {\n                \"standardVersion\": 1,\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"type\": \"asset\",\n                        \"comment\": \"example2\",\n                        \"id\": \"link1\"\n                    }\n                ],\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signType\": \"type1\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                        }\n                    }\n                ],\n                \"body\": {}\n            }\n        },\n        {\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset3\",\n            \"payload\": {\n                \"standardVersion\": 1,\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"type\": \"asset\",\n                        \"comment\": \"example2\",\n                        \"id\": \"link1\"\n                    }\n                ],\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signType\": \"type1\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                        }\n                    }\n                ],\n                \"body\": {}\n            }\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1327,9 +1333,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets/:asset_id",
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets/:asset_id",
 									"host": [
-										"{{baseUrl}}"
+										"{{node1Url}}"
 									],
 									"path": [
 										"nodes",
@@ -1368,15 +1374,77 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:37:22 GMT"
+									"value": "Thu, 07 Sep 2023 06:47:53 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "564"
+									"value": "582"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"payload\": {\n            \"standardVersion\": 1,\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"type\": \"asset\",\n                    \"comment\": \"example2\",\n                    \"id\": \"link1\"\n                }\n            ],\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signType\": \"type1\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                    }\n                }\n            ],\n            \"body\": {},\n            \"id\": \"\"\n        }\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"payload\": {\n                \"standardVersion\": 1,\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"type\": \"asset\",\n                        \"comment\": \"example2\",\n                        \"id\": \"link1\"\n                    }\n                ],\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signType\": \"type1\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                        }\n                    }\n                ],\n                \"body\": {}\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "Error Retrieve an Asset",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{node1Url}}/nodes/:node_uri/channels/:channel_id/assets/:asset_id",
+									"host": [
+										"{{node1Url}}"
+									],
+									"path": [
+										"nodes",
+										":node_uri",
+										"channels",
+										":channel_id",
+										"assets",
+										":asset_id"
+									],
+									"variable": [
+										{
+											"key": "node_uri",
+											"value": "node1.test.com",
+											"description": "(Required) "
+										},
+										{
+											"key": "channel_id",
+											"value": "channel1",
+											"description": "(Required) "
+										},
+										{
+											"key": "asset_id",
+											"value": "asset10",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Sep 2023 06:48:01 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"status\": \"invalid request\",\n    \"error\": \"asset does not exist\"\n}"
 						}
 					]
 				},
@@ -1467,7 +1535,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "node1.example.com",
+											"value": "node1.test.com",
 											"description": "(Required) "
 										},
 										{
@@ -1493,15 +1561,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:38:11 GMT"
+									"value": "Thu, 07 Sep 2023 06:48:30 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "70"
+									"value": "55"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to update asset\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully updated asset\"\n}"
 						}
 					]
 				},
@@ -1517,7 +1585,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"assetUri\": \"reprehenderit qui culpa deserunt velit\",\n  \"type\": \"amet dolore enim velit\",\n  \"comment\": \"si\",\n  \"id\": \"link2\"\n}",
+							"raw": "{\n  \"assetUri\": \"dbom://node1.test.com/nodes/node2.test.com/channels/channel1/assets/asset2\",\n  \"type\": \"DEPENDENT_ON\",\n  \"comment\": \"adding link\",\n  \"id\": \"link2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1570,7 +1638,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"assetUri\": \"reprehenderit qui culpa deserunt velit\",\n  \"type\": \"amet dolore enim velit\",\n  \"comment\": \"si\",\n  \"id\": \"link2\"\n}",
+									"raw": "{\n  \"assetUri\": \"dbom://node1.test.com/nodes/node2.test.com/channels/channel1/assets/asset2\",\n  \"type\": \"DEPENDENT_ON\",\n  \"comment\": \"adding link\",\n  \"id\": \"link2\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1594,7 +1662,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "node1.test.com",
+											"value": "node1.example.com",
 											"description": "(Required) "
 										},
 										{
@@ -1620,15 +1688,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:39:17 GMT"
+									"value": "Thu, 07 Sep 2023 06:50:27 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "68"
+									"value": "54"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to link asset\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully linked asset\"\n}"
 						}
 					]
 				},
@@ -1731,15 +1799,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:39:45 GMT"
+									"value": "Thu, 07 Sep 2023 06:51:02 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "70"
+									"value": "56"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent request to unlink asset\"\n}"
+							"body": "{\n    \"success\": true,\n    \"status\": \"successfully unlinked asset\"\n}"
 						}
 					]
 				},
@@ -1805,80 +1873,6 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets/_query?query={ \"assetId\": { \"equals\": \"asset1\" }}&fields=[]&limit=1&skip=0",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"channels",
-										":channel_id",
-										"assets",
-										"_query"
-									],
-									"query": [
-										{
-											"key": "query",
-											"value": "{ \"assetId\": { \"equals\": \"asset1\" }}",
-											"description": "(Required) Query"
-										},
-										{
-											"key": "fields",
-											"value": "[]",
-											"description": "Fields to return"
-										},
-										{
-											"key": "limit",
-											"value": "1",
-											"description": "Pagination limit"
-										},
-										{
-											"key": "skip",
-											"value": "0",
-											"description": "Pagination skip"
-										}
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node1.test.com",
-											"description": "(Required) "
-										},
-										{
-											"key": "channel_id",
-											"value": "channel1",
-											"description": "(Required) "
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:40:14 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "565"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"payload\": {\n            \"standardVersion\": 1,\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                },\n                {\n                    \"notaryId\": \"not2\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"type\": \"asset\",\n                    \"comment\": \"example2\",\n                    \"id\": \"id4\"\n                }\n            ],\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signType\": \"type1\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"Xdjfgfn\"\n                    }\n                }\n            ],\n            \"body\": {},\n            \"id\": \"\"\n        }\n    }\n]"
-						},
-						{
-							"name": "Rich Query Assets",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
 									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets/_query?query={ }&fields=[]&limit=1&skip=0",
 									"host": [
 										"{{baseUrl}}"
@@ -1927,10 +1921,25 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "Text",
-							"header": [],
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Sep 2023 07:11:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "583"
+								}
+							],
 							"cookie": [],
-							"body": ""
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"payload\": {\n                \"standardVersion\": 1,\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    },\n                    {\n                        \"notaryId\": \"not2\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"type\": \"asset\",\n                        \"comment\": \"example2\",\n                        \"id\": \"id4\"\n                    }\n                ],\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signType\": \"type1\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"Xdjfgfn\"\n                        }\n                    }\n                ],\n                \"body\": {}\n            }\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1982,72 +1991,6 @@
 						"description": "Query Assets (with POST Body)"
 					},
 					"response": [
-						{
-							"name": "Query Assets - NOT FOUND",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"where\": {\n        \"assetId\": {\n            \"equals\": \"Asset2\"\n        }\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/channels/:channel_id/assets/_query",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"channels",
-										":channel_id",
-										"assets",
-										"_query"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "node1.test.com",
-											"description": "(Required) "
-										},
-										{
-											"key": "channel_id",
-											"value": "channel1",
-											"description": "(Required) "
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 19 May 2023 15:39:57 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "3"
-								}
-							],
-							"cookie": [],
-							"body": "[]"
-						},
 						{
 							"name": "Query Assets",
 							"originalRequest": {
@@ -2104,15 +2047,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:41:14 GMT"
+									"value": "Thu, 07 Sep 2023 06:51:50 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "565"
+									"value": "583"
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"payload\": {\n            \"standardVersion\": 1,\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                },\n                {\n                    \"notaryId\": \"not2\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"type\": \"asset\",\n                    \"comment\": \"example2\",\n                    \"id\": \"id4\"\n                }\n            ],\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signType\": \"type1\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"Xdjfgfn\"\n                    }\n                }\n            ],\n            \"body\": {},\n            \"id\": \"\"\n        }\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"payload\": {\n                \"standardVersion\": 1,\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    },\n                    {\n                        \"notaryId\": \"not2\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"type\": \"asset\",\n                        \"comment\": \"example2\",\n                        \"id\": \"id4\"\n                    }\n                ],\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signType\": \"type1\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"Xdjfgfn\"\n                        }\n                    }\n                ],\n                \"body\": {}\n            }\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2188,7 +2131,7 @@
 									"variable": [
 										{
 											"key": "node_uri",
-											"value": "node1.test.com",
+											"value": "node1.example.com",
 											"description": "(Required) "
 										},
 										{
@@ -2214,7 +2157,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 10 Aug 2023 13:41:29 GMT"
+									"value": "Thu, 07 Sep 2023 06:52:01 GMT"
 								},
 								{
 									"key": "Transfer-Encoding",
@@ -2222,7 +2165,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"64d4e7ac06d9b251dd2bedb2\",\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"action\": \"CREATE\",\n        \"payload\": {\n            \"assetId\": \"asset1\",\n            \"channelId\": \"channel1\",\n            \"createdAt\": \"2023-08-10T13:35:40.144Z\",\n            \"id\": \"64d4e7ac06d9b251dd2bedb1\",\n            \"modifiedAt\": \"2023-08-10T13:35:40.144Z\",\n            \"payload\": {\n                \"body\": {},\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"id\": \"\",\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"comment\": \"example2\",\n                        \"id\": \"link1\",\n                        \"type\": \"asset\"\n                    }\n                ],\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                        },\n                        \"signType\": \"type1\"\n                    }\n                ],\n                \"standardVersion\": 1\n            }\n        },\n        \"timestamp\": \"2023-08-10T13:35:40.166Z\"\n    },\n    {\n        \"id\": \"64d4e84306d9b251dd2bedb3\",\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"action\": \"UPDATE\",\n        \"payload\": {\n            \"body\": {},\n            \"createdAt\": \"2023-05-15T12:34:56Z\",\n            \"id\": \"\",\n            \"links\": [\n                {\n                    \"assetUri\": \"string\",\n                    \"comment\": \"example2\",\n                    \"id\": \"id4\",\n                    \"type\": \"asset\"\n                }\n            ],\n            \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n            \"notarizations\": [\n                {\n                    \"notaryId\": \"not1\",\n                    \"notaryMeta\": {}\n                },\n                {\n                    \"notaryId\": \"not2\",\n                    \"notaryMeta\": {}\n                }\n            ],\n            \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n            \"signatures\": [\n                {\n                    \"hashType\": \"SHA256\",\n                    \"signMeta\": {\n                        \"authority\": \"user1\",\n                        \"keyId\": \"12345\",\n                        \"sign\": \"Xdjfgfn\"\n                    },\n                    \"signType\": \"type1\"\n                }\n            ],\n            \"standardVersion\": 1\n        },\n        \"timestamp\": \"2023-08-10T13:38:11.975Z\"\n    },\n    {\n        \"id\": \"64d4e88506d9b251dd2bedb4\",\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"action\": \"LINK\",\n        \"payload\": {\n            \"assetId\": \"asset1\",\n            \"channelId\": \"channel1\",\n            \"createdAt\": \"2023-08-10T13:35:40.144Z\",\n            \"id\": \"64d4e7ac06d9b251dd2bedb1\",\n            \"modifiedAt\": \"2023-08-10T13:39:17.469Z\",\n            \"payload\": {\n                \"body\": {},\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"id\": \"\",\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"comment\": \"example2\",\n                        \"id\": \"id4\",\n                        \"type\": \"asset\"\n                    },\n                    {\n                        \"assetUri\": \"reprehenderit qui culpa deserunt velit\",\n                        \"comment\": \"si\",\n                        \"id\": \"link2\",\n                        \"type\": \"amet dolore enim velit\"\n                    }\n                ],\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    },\n                    {\n                        \"notaryId\": \"not2\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"Xdjfgfn\"\n                        },\n                        \"signType\": \"type1\"\n                    }\n                ],\n                \"standardVersion\": 1\n            }\n        },\n        \"timestamp\": \"2023-08-10T13:39:17.479Z\"\n    },\n    {\n        \"id\": \"64d4e8a106d9b251dd2bedb5\",\n        \"channelId\": \"channel1\",\n        \"assetId\": \"asset1\",\n        \"action\": \"UNLINK\",\n        \"payload\": {\n            \"assetId\": \"asset1\",\n            \"channelId\": \"channel1\",\n            \"createdAt\": \"2023-08-10T13:35:40.144Z\",\n            \"id\": \"64d4e7ac06d9b251dd2bedb1\",\n            \"modifiedAt\": \"2023-08-10T13:39:45.195Z\",\n            \"payload\": {\n                \"body\": {},\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"id\": \"\",\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"comment\": \"example2\",\n                        \"id\": \"id4\",\n                        \"type\": \"asset\"\n                    }\n                ],\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    },\n                    {\n                        \"notaryId\": \"not2\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"Xdjfgfn\"\n                        },\n                        \"signType\": \"type1\"\n                    }\n                ],\n                \"standardVersion\": 1\n            }\n        },\n        \"timestamp\": \"2023-08-10T13:39:45.202Z\"\n    }\n]"
+							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"id\": \"64f96a48e08e507c692dec34\",\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"action\": \"CREATE\",\n            \"payload\": {\n                \"assetId\": \"asset1\",\n                \"channelId\": \"channel1\",\n                \"createdAt\": \"2023-09-07T06:14:32.800Z\",\n                \"id\": \"64f96a48e08e507c692dec33\",\n                \"modifiedAt\": \"2023-09-07T06:14:32.800Z\",\n                \"payload\": {\n                    \"body\": {},\n                    \"createdAt\": \"2023-05-15T12:34:56Z\",\n                    \"links\": [\n                        {\n                            \"assetUri\": \"string\",\n                            \"comment\": \"example2\",\n                            \"id\": \"link1\",\n                            \"type\": \"asset\"\n                        }\n                    ],\n                    \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                    \"notarizations\": [\n                        {\n                            \"notaryId\": \"not1\",\n                            \"notaryMeta\": {}\n                        }\n                    ],\n                    \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                    \"signatures\": [\n                        {\n                            \"hashType\": \"SHA256\",\n                            \"signMeta\": {\n                                \"authority\": \"user1\",\n                                \"keyId\": \"12345\",\n                                \"sign\": \"asdfbiuvagebvbayerfasdfbsjasdfdliufgalsi\"\n                            },\n                            \"signType\": \"type1\"\n                        }\n                    ],\n                    \"standardVersion\": 1\n                }\n            },\n            \"timestamp\": \"2023-09-07T06:14:32.809Z\"\n        },\n        {\n            \"id\": \"64f9723e379ca43675f1526e\",\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"action\": \"UPDATE\",\n            \"payload\": {\n                \"body\": {},\n                \"createdAt\": \"2023-05-15T12:34:56Z\",\n                \"links\": [\n                    {\n                        \"assetUri\": \"string\",\n                        \"comment\": \"example2\",\n                        \"id\": \"id4\",\n                        \"type\": \"asset\"\n                    }\n                ],\n                \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                \"notarizations\": [\n                    {\n                        \"notaryId\": \"not1\",\n                        \"notaryMeta\": {}\n                    },\n                    {\n                        \"notaryId\": \"not2\",\n                        \"notaryMeta\": {}\n                    }\n                ],\n                \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                \"signatures\": [\n                    {\n                        \"hashType\": \"SHA256\",\n                        \"signMeta\": {\n                            \"authority\": \"user1\",\n                            \"keyId\": \"12345\",\n                            \"sign\": \"Xdjfgfn\"\n                        },\n                        \"signType\": \"type1\"\n                    }\n                ],\n                \"standardVersion\": 1\n            },\n            \"timestamp\": \"2023-09-07T06:48:30.695Z\"\n        },\n        {\n            \"id\": \"64f972b3379ca43675f1526f\",\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"action\": \"LINK\",\n            \"payload\": {\n                \"assetId\": \"asset1\",\n                \"channelId\": \"channel1\",\n                \"createdAt\": \"2023-09-07T06:14:32.800Z\",\n                \"id\": \"64f96a48e08e507c692dec33\",\n                \"modifiedAt\": \"2023-09-07T06:50:27.688Z\",\n                \"payload\": {\n                    \"body\": {},\n                    \"createdAt\": \"2023-05-15T12:34:56Z\",\n                    \"links\": [\n                        {\n                            \"assetUri\": \"string\",\n                            \"comment\": \"example2\",\n                            \"id\": \"id4\",\n                            \"type\": \"asset\"\n                        },\n                        {\n                            \"assetUri\": \"dbom://node1.test.com/nodes/node2.test.com/channels/channel1/assets/asset2\",\n                            \"comment\": \"adding link\",\n                            \"id\": \"link2\",\n                            \"type\": \"DEPENDENT_ON\"\n                        }\n                    ],\n                    \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                    \"notarizations\": [\n                        {\n                            \"notaryId\": \"not1\",\n                            \"notaryMeta\": {}\n                        },\n                        {\n                            \"notaryId\": \"not2\",\n                            \"notaryMeta\": {}\n                        }\n                    ],\n                    \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                    \"signatures\": [\n                        {\n                            \"hashType\": \"SHA256\",\n                            \"signMeta\": {\n                                \"authority\": \"user1\",\n                                \"keyId\": \"12345\",\n                                \"sign\": \"Xdjfgfn\"\n                            },\n                            \"signType\": \"type1\"\n                        }\n                    ],\n                    \"standardVersion\": 1\n                }\n            },\n            \"timestamp\": \"2023-09-07T06:50:27.699Z\"\n        },\n        {\n            \"id\": \"64f972d6379ca43675f15270\",\n            \"channelId\": \"channel1\",\n            \"assetId\": \"asset1\",\n            \"action\": \"UNLINK\",\n            \"payload\": {\n                \"assetId\": \"asset1\",\n                \"channelId\": \"channel1\",\n                \"createdAt\": \"2023-09-07T06:14:32.800Z\",\n                \"id\": \"64f96a48e08e507c692dec33\",\n                \"modifiedAt\": \"2023-09-07T06:51:02.087Z\",\n                \"payload\": {\n                    \"body\": {},\n                    \"createdAt\": \"2023-05-15T12:34:56Z\",\n                    \"links\": [\n                        {\n                            \"assetUri\": \"string\",\n                            \"comment\": \"example2\",\n                            \"id\": \"id4\",\n                            \"type\": \"asset\"\n                        }\n                    ],\n                    \"modifiedAt\": \"2023-05-15T12:34:56Z\",\n                    \"notarizations\": [\n                        {\n                            \"notaryId\": \"not1\",\n                            \"notaryMeta\": {}\n                        },\n                        {\n                            \"notaryId\": \"not2\",\n                            \"notaryMeta\": {}\n                        }\n                    ],\n                    \"schemaUrl\": \"https://raw.githubusercontent.com/spdx/spdx-spec/development/v2.3.1/schemas/spdx-schema.json\",\n                    \"signatures\": [\n                        {\n                            \"hashType\": \"SHA256\",\n                            \"signMeta\": {\n                                \"authority\": \"user1\",\n                                \"keyId\": \"12345\",\n                                \"sign\": \"Xdjfgfn\"\n                            },\n                            \"signType\": \"type1\"\n                        }\n                    ],\n                    \"standardVersion\": 1\n                }\n            },\n            \"timestamp\": \"2023-09-07T06:51:02.095Z\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2271,7 +2214,7 @@
 					},
 					"response": [
 						{
-							"name": "Validate notarization and signature on asset",
+							"name": "Validate notarization and signature on asset Copy",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2389,45 +2332,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "List all requests",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/all",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										"all"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:20:59 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "242"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"requestId\": \"64f611f0d86d7e0b7ebc30e2\",\n            \"nodeUri\": \"node1.test.com\",\n            \"nodeId\": \"node1\",\n            \"channelId\": \"channel1\",\n            \"status\": \"AWAITING_ACTION\",\n            \"createdAt\": \"2023-09-04T17:20:48.257Z\",\n            \"modifiedAt\": \"2023-09-04T17:20:48.257Z\"\n        }\n    ]\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "List one request",
@@ -2452,137 +2357,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "List one request",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/:request_id",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64f611f0d86d7e0b7ebc30e2"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:21:16 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "242"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"result\": [\n        {\n            \"requestId\": \"64f611f0d86d7e0b7ebc30e2\",\n            \"nodeUri\": \"node1.test.com\",\n            \"nodeId\": \"node1\",\n            \"channelId\": \"channel1\",\n            \"status\": \"AWAITING_ACTION\",\n            \"createdAt\": \"2023-09-04T17:20:48.257Z\",\n            \"modifiedAt\": \"2023-09-04T17:20:48.257Z\"\n        }\n    ]\n}"
-						},
-						{
-							"name": "Wrong ID",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/:request_id",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64f611f0d86d7e0b7ebc30e2s"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:28:27 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "67"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"status\": \"Failed to retrieve FederationRequests\"\n}"
-						},
-						{
-							"name": "Incorrect ID",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/:request_id",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64f611f0d86d7e0b7ebc30e2"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:48:17 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "82"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"status\": \"FederationRequest 64f611f0d86d7e0b7ebc30e2 not found\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Accept request",
@@ -2617,114 +2392,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Accept request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"ACCEPT\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{node1Url}}/federation/requests/:request_id/accept",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id",
-										"accept"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64c2b68e3e640b6a8f35208a"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 27 Jul 2023 18:45:06 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "69"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully accepted federation request\"\n}"
-						},
-						{
-							"name": "Error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"ACCEPT\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/:request_id/accept",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id",
-										"accept"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64f5aec73f49364b7b3881f6"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:37:29 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "144"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"status\": \"Something went wrong\",\n    \"error\": \"FederationRequest 64f5aec73f49364b7b3881f6 not found or already ACCEPTED / REJECTED\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Reject request",
@@ -2759,114 +2427,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Reject request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"REJECT\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{node1Url}}/federation/requests/:request_id/reject",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id",
-										"reject"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64c7857971c701252da596a5"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 31 Jul 2023 10:15:15 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "69"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully rejected federation request\"\n}"
-						},
-						{
-							"name": "Error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"type\": \"REJECT\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{node2Url}}/federation/requests/:request_id/reject",
-									"host": [
-										"{{node2Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										":request_id",
-										"reject"
-									],
-									"variable": [
-										{
-											"key": "request_id",
-											"value": "64ddf8eba4acb883b830ad7d"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 04 Sep 2023 17:38:37 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "144"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"status\": \"Something went wrong\",\n    \"error\": \"FederationRequest 64ddf8eba4acb883b830ad7d not found or already ACCEPTED / REJECTED\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Revoke request",
@@ -2893,54 +2454,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Revoke request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nodeUri\": \"node2/channels/channel20\",\r\n    \"type\": \"REVOKE\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{node1Url}}/federation/requests/revoke",
-									"host": [
-										"{{node1Url}}"
-									],
-									"path": [
-										"federation",
-										"requests",
-										"revoke"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 31 Jul 2023 10:42:56 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "61"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": true,\n    \"status\": \"Successfully sent revoke request\"\n}"
-						}
-					]
+					"response": []
 				}
 			]
 		},
@@ -2976,41 +2490,7 @@
 						},
 						"description": "List all notaries that are configured locally"
 					},
-					"response": [
-						{
-							"name": "List locally configured notaries",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/nodes/:node_uri/notaries",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"nodes",
-										":node_uri",
-										"notaries"
-									],
-									"variable": [
-										{
-											"key": "node_uri",
-											"value": "_local"
-										}
-									]
-								}
-							},
-							"_postman_previewlanguage": "Text",
-							"header": [],
-							"cookie": [],
-							"body": ""
-						}
-					]
+					"response": []
 				}
 			]
 		},
@@ -3060,76 +2540,6 @@
 					],
 					"cookie": [],
 					"body": "Chainsource Gateway User and Client APIs - v2. runtime:go1.19.2"
-				}
-			]
-		},
-		{
-			"name": "Check WS",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3050/api/v2/ws",
-					"host": [
-						"localhost"
-					],
-					"port": "3050",
-					"path": [
-						"api",
-						"v2",
-						"ws"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Check Federation",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7205",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7205"
-				}
-			},
-			"response": [
-				{
-					"name": "Check",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:7205",
-							"host": [
-								"localhost"
-							],
-							"port": "7205"
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "plain",
-					"header": [
-						{
-							"key": "Date",
-							"value": "Sat, 17 Jun 2023 19:48:38 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "58"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/plain; charset=utf-8"
-						}
-					],
-					"cookie": [],
-					"body": "Chainsource Gateway Federation APIs - v2. runtime:go1.19.2"
 				}
 			]
 		}
